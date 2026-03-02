@@ -36,19 +36,17 @@ def authenticate_user(username: str, password: str) -> dict | None:
     return {"username": DEFAULT_USERNAME, "name": "CSO Admin"}
 
 
-def verify_google_token(token: str) -> dict | None:
+def verify_google_token(token: str) -> dict:
     try:
         idinfo = id_token.verify_oauth2_token(
             token, google_requests.Request(), GOOGLE_CLIENT_ID
         )
     except Exception as e:
-        print(f"Google token verification failed: {e}")
-        return None
+        raise ValueError(f"Token verification failed: {e}")
 
     email = idinfo.get("email", "")
-    print(f"Google login attempt with email: {email}")
     if "earthenable" not in email.lower():
-        return None
+        raise PermissionError(f"Email {email} is not an Earthenable work email")
     return {
         "username": email,
         "name": idinfo.get("name", email.split("@")[0]),

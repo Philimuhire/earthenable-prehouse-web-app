@@ -33,11 +33,17 @@ def login(request: LoginRequest):
 
 @app.post("/api/auth/google", response_model=TokenResponse)
 def google_login(request: GoogleLoginRequest):
-    user = verify_google_token(request.credential)
-    if not user:
+    try:
+        user = verify_google_token(request.credential)
+    except PermissionError as e:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=str(e),
+        )
+    except ValueError as e:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Only Earthenable work email addresses are allowed",
+            detail=str(e),
         )
     token = create_access_token(data={"sub": user["username"], "name": user["name"]})
     return TokenResponse(access_token=token)
