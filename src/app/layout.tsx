@@ -1,0 +1,26 @@
+import type { Metadata } from "next";
+import Script from "next/script";
+import { Inter } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "EarthEnable | Pre-House Assessment",
+  description: "Complete your pre-house assessment with EarthEnable",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        {children}
+        <Script src="https://accounts.google.com/gsi/client" strategy="beforeInteractive" />
+      </body>
+    </html>
+  );
+}
