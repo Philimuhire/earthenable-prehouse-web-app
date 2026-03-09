@@ -49,9 +49,12 @@ export default async function CompletePage({ searchParams }: PageProps) {
             </p>
           </div>
           <div className="flex w-full flex-col gap-3">
-            <button className="w-full rounded-xl bg-yellow-500 py-4 text-base font-semibold text-white shadow-md transition-all hover:bg-yellow-600 active:scale-95">
+            <Link
+              href="/register-opportunity?result=yellow"
+              className="flex w-full items-center justify-center rounded-xl bg-yellow-500 py-4 text-base font-semibold text-white shadow-md transition-all hover:bg-yellow-600 active:scale-95"
+            >
               Register an Opportunity
-            </button>
+            </Link>
             <Link
               href="/dashboard"
               className="flex w-full items-center justify-center rounded-xl border border-brand-black/20 py-3 text-sm font-semibold text-brand-black transition-all hover:border-brand-black/40 active:scale-95"
@@ -79,9 +82,12 @@ export default async function CompletePage({ searchParams }: PageProps) {
           </p>
         </div>
         <div className="flex w-full flex-col gap-3">
-          <button className="w-full rounded-xl bg-green-600 py-4 text-base font-semibold text-white shadow-md transition-all hover:bg-green-700 active:scale-95">
+          <Link
+            href="/register-opportunity?result=green"
+            className="flex w-full items-center justify-center rounded-xl bg-green-600 py-4 text-base font-semibold text-white shadow-md transition-all hover:bg-green-700 active:scale-95"
+          >
             Register an Opportunity
-          </button>
+          </Link>
           <Link
             href="/dashboard"
             className="flex w-full items-center justify-center rounded-xl border border-brand-black/20 py-3 text-sm font-semibold text-brand-black transition-all hover:border-brand-black/40 active:scale-95"
