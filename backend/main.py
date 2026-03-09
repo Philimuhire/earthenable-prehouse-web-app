@@ -108,7 +108,8 @@ def sf_create_opportunity(
     try:
         sf = get_sf()
 
-        if request.existingContactId:
+        is_existing = bool(request.accountId or request.existingContactId)
+        if is_existing:
             customer_id = request.existingContactId
             account_id = request.accountId
         else:
@@ -120,8 +121,6 @@ def sf_create_opportunity(
             })
             customer_id = new_customer["contactId"]
             account_id = new_customer["accountId"]
-
-        is_existing = bool(request.existingContactId)
         opp_input = {
             "customerId": customer_id,
             "accountId": account_id,

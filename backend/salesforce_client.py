@@ -81,11 +81,21 @@ def search_customers(sf: Salesforce, query: str) -> list[dict]:
     records = []
     for r in result["records"]:
         contact = r.get("Primary_Contact__r") or {}
+        first = contact.get("FirstName") or ""
+        last = contact.get("LastName") or ""
+        if not first and not last:
+            name_part = r["Name"].split("|")[0].strip()
+            parts = [p for p in name_part.split() if not p[0].isdigit() and p != "-"]
+            if len(parts) >= 2:
+                first = parts[0]
+                last = " ".join(parts[1:])
+            elif parts:
+                last = parts[0]
         records.append({
             "id": r["Id"],
             "name": r["Name"],
-            "firstName": contact.get("FirstName") or "",
-            "lastName": contact.get("LastName") or "",
+            "firstName": first,
+            "lastName": last,
             "phone": r.get("Phone") or r.get("Customer_Phone_Number__c") or "",
             "village": r.get("Umudugudu_Text__c") or "",
             "district": r.get("Umudugudu_District__c") or "",
@@ -150,13 +160,6 @@ def _build_opp_name(data: dict) -> str:
         name += f" {house} - {phase}"
     elif house:
         name += f" {house}"
-    if not data.get("isExisting"):
-        district = data.get("district") or ""
-        year = data.get("customerSignedDate", "")[:4][2:]
-        code = data.get("customerCode") or ""
-        suffix_parts = [p for p in [district, year, code] if p]
-        if suffix_parts:
-            name += f" | {'-'.join(suffix_parts)}"
     return name
 
 
