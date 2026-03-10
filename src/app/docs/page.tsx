@@ -390,7 +390,7 @@ function ApiSection() {
       description: "Login with username and password",
       auth: false,
       request: `{
-  "username": "cso@earthenable.org",
+  "username": "eerwcso@earthenable.org",
   "password": "..."
 }`,
       response: `{
@@ -420,7 +420,7 @@ function ApiSection() {
       auth: true,
       request: null,
       response: `{
-  "username": "cso@earthenable.org",
+  "username": "eerwcso@earthenable.org",
   "name": "CSO User"
 }`,
     },

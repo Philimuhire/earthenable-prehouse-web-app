@@ -121,7 +121,7 @@ def get_picklists(sf: Salesforce) -> dict:
     result["country"] = ["Rwanda", "Uganda", "Kenya"]
     result["productInterest"] = [
         "Floor_Standard Clear | DirectSale",
-        "Floor_Standard Clear | DirectSale",
+        "Floor_Standard Color | DirectSale",
         "Plaster_Interior | DirectSale",
         "Plaster_Exterior | DirectSale",
     ]
